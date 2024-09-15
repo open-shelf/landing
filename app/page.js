@@ -103,160 +103,166 @@ export default function Home() {
 
   const FeaturesSection = () => (
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl lg:text-center">
-        <h2 className="text-base font-semibold leading-7 text-[#E63946]">
-          Smart Consumption
-        </h2>
-        <p className="mt-2 text-3xl font-bold tracking-tight text-[#1D3557] sm:text-4xl">
-          Tailored Content, Fair Pricing, Real Earnings
-        </p>
-      </div>
-      <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-        <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-          {[
-            {
-              name: "Precision Pricing",
-              description:
-                "Pay per chapter for books, per minute for music, videos, and games. Only pay for what you truly enjoy.",
-            },
-            {
-              name: "Stake on Potential",
-              description:
-                "Invest in content you believe in. Reap rewards as it gains popularity across all media types.",
-            },
-            {
-              name: "Empower Creators",
-              description:
-                "Directly support emerging talent. Help your favorite authors, musicians, filmmakers, and game developers thrive.",
-            },
-            {
-              name: "Earn Through Engagement",
-              description:
-                "Transform your media instincts into tangible rewards. Profit from discovering the next big hit.",
-            },
-          ].map((feature) => (
-            <div key={feature.name} className="relative pl-16">
-              <dt className="text-base font-semibold leading-7 text-[#457B9D]">
-                <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E63946]">
-                  <ChevronRightIcon
-                    className="h-6 w-6 text-white"
-                    aria-hidden="true"
-                  />
-                </div>
-                {feature.name}
-              </dt>
-              <dd className="mt-2 text-base leading-7 text-[#1D3557]">
-                {feature.description}
-              </dd>
-            </div>
-          ))}
-        </dl>
+      <div className="relative isolate overflow-hidden bg-[#A8DADC] px-6 py-12 shadow-2xl sm:rounded-3xl sm:px-16 md:py-16 lg:px-24">
+        <div className="mx-auto max-w-2xl lg:text-center">
+          <h2 className="text-base font-semibold leading-7 text-[#E63946]">
+            Smart Consumption
+          </h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-[#1D3557] sm:text-4xl">
+            Tailored Content, Fair Pricing, Real Earnings
+          </p>
+        </div>
+        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+            {[
+              {
+                name: "Precision Pricing",
+                description:
+                  "Pay per chapter for books, per minute for music, videos, and games. Only pay for what you truly enjoy.",
+              },
+              {
+                name: "Stake on Potential",
+                description:
+                  "Invest in content you believe in. Reap rewards as it gains popularity across all media types.",
+              },
+              {
+                name: "Empower Creators",
+                description:
+                  "Directly support emerging talent. Help your favorite authors, musicians, filmmakers, and game developers thrive.",
+              },
+              {
+                name: "Earn Through Engagement",
+                description:
+                  "Transform your media instincts into tangible rewards. Profit from discovering the next big hit.",
+              },
+            ].map((feature) => (
+              <div key={feature.name} className="relative pl-16">
+                <dt className="text-base font-semibold leading-7 text-[#1D3557]">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E63946]">
+                    <ChevronRightIcon
+                      className="h-6 w-6 text-white"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  {feature.name}
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-[#457B9D]">
+                  {feature.description}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </div>
   );
 
   const UserJourneySection = () => (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8 text-[#1D3557]">
-        Your Journey with OpenShelf
-      </h2>
+    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative isolate overflow-hidden bg-[#A8DADC] px-6 py-12 shadow-2xl sm:rounded-3xl sm:px-16 md:py-16 lg:px-24">
+        <h2 className="text-3xl font-bold text-center mb-8 text-[#1D3557]">
+          Your Journey with OpenShelf
+        </h2>
 
-      <div className="flex justify-center mb-12">
-        <div className="inline-flex rounded-md shadow-sm" role="group">
-          <button
-            type="button"
-            className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
-              userType === "creator"
-                ? "bg-[#E63946] text-white"
-                : "bg-[#A8DADC] text-[#1D3557] hover:bg-[#7fb5b8]"
-            }`}
-            onClick={() => setUserType("creator")}
-          >
-            I'm a Creator
-          </button>
-          <button
-            type="button"
-            className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
-              userType === "consumer"
-                ? "bg-[#E63946] text-white"
-                : "bg-[#A8DADC] text-[#1D3557] hover:bg-[#7fb5b8]"
-            }`}
-            onClick={() => setUserType("consumer")}
-          >
-            I'm a Consumer
-          </button>
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex rounded-md shadow-sm" role="group">
+            <button
+              type="button"
+              className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
+                userType === "creator"
+                  ? "bg-[#E63946] text-white"
+                  : "bg-white text-[#1D3557] hover:bg-gray-100"
+              }`}
+              onClick={() => setUserType("creator")}
+            >
+              I'm a Creator
+            </button>
+            <button
+              type="button"
+              className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
+                userType === "consumer"
+                  ? "bg-[#E63946] text-white"
+                  : "bg-white text-[#1D3557] hover:bg-gray-100"
+              }`}
+              onClick={() => setUserType("consumer")}
+            >
+              I'm a Consumer
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="bg-[#F1FAEE] p-6 rounded-lg shadow-md">
-        <h3 className="text-2xl font-semibold mb-4 text-[#1D3557]">
-          {userType === "creator" ? "Creator's Journey" : "Consumer's Journey"}
-        </h3>
-        <ul className="space-y-4">
-          {userType === "creator" ? (
-            <>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Instant Payments: Receive earnings directly in seconds after
-                  each sale.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Honest Reviews: Staking system ensures genuine feedback from
-                  invested consumers.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Fair Compensation: Earn more with our transparent revenue
-                  sharing model.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Engage Directly: Build a community of supporters who are
-                  invested in your success.
-                </span>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Pay-Per-Use: Only pay for the content you actually consume,
-                  saving costs.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Passive Income: Earn rewards by staking on content you believe
-                  will be successful.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Discover Gems: Support emerging creators and benefit from
-                  their success.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                <span className="text-[#1D3557]">
-                  Flexible Consumption: Enjoy books by chapter, music by track,
-                  videos and games by playtime.
-                </span>
-              </li>
-            </>
-          )}
-        </ul>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-2xl font-semibold mb-4 text-[#1D3557]">
+            {userType === "creator"
+              ? "Creator's Journey"
+              : "Consumer's Journey"}
+          </h3>
+          <ul className="space-y-4">
+            {userType === "creator" ? (
+              <>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Instant Payments: Receive earnings directly in seconds after
+                    each sale.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Honest Reviews: Staking system ensures genuine feedback from
+                    invested consumers.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Fair Compensation: Earn more with our transparent revenue
+                    sharing model.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Engage Directly: Build a community of supporters who are
+                    invested in your success.
+                  </span>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Pay-Per-Use: Only pay for the content you actually consume,
+                    saving costs.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Passive Income: Earn rewards by staking on content you
+                    believe will be successful.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Discover Gems: Support emerging creators and benefit from
+                    their success.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                  <span className="text-[#457B9D]">
+                    Flexible Consumption: Enjoy books by chapter, music by
+                    track, videos and games by playtime.
+                  </span>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );
@@ -341,16 +347,36 @@ export default function Home() {
   ];
 
   return (
-    <div className="snap-y snap-mandatory h-screen overflow-y-scroll bg-[#F1FAEE]">
-      {sections.map((section, index) => (
-        <section
-          key={section.id}
-          ref={(el) => (observerRefs.current[index] = el)}
-          className="snap-start h-screen flex items-center"
-        >
-          {section.content}
+    <div className="bg-[#F1FAEE]">
+      <style jsx global>{`
+        @media (min-width: 768px) {
+          .desktop-snap {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+          }
+          .desktop-snap > section {
+            scroll-snap-align: start;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+          }
+        }
+      `}</style>
+      <div className="desktop-snap">
+        <section className="min-h-screen flex items-center">
+          <HeroSection />
         </section>
-      ))}
+        <section className="min-h-screen flex items-center">
+          <FeaturesSection />
+        </section>
+        <section className="min-h-screen flex items-center">
+          <UserJourneySection />
+        </section>
+        <section className="min-h-screen flex items-center">
+          <CTASection />
+        </section>
+      </div>
     </div>
   );
 }
