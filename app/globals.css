@@ -18,7 +18,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden; /* Prevent default scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 @layer utilities {
@@ -32,21 +32,37 @@ html {
   scroll-behavior: smooth;
 }
 
-.snap-y {
-  scroll-snap-type: y mandatory;
+@media (min-width: 768px) {
+  .snap-y {
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+    min-height: 100vh;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .snap-y::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .snap-y {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
 
-.snap-start {
-  scroll-snap-align: start;
-}
+@media (max-width: 767px) {
+  .snap-y {
+    overflow-y: auto;
+  }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.snap-y::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.snap-y {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  .snap-start {
+    min-height: auto;
+    padding: 2rem 0;
+  }
 }

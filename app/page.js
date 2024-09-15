@@ -194,8 +194,8 @@ export default function Home() {
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-2xl font-semibold mb-4 text-[#1D3557]">
             {userType === "creator"
-              ? "Creator&apos;s Journey"
-              : "Consumer&apos;s Journey"}
+              ? "Creator's Journey"
+              : "Consumer's Journey"}
           </h3>
           <ul className="space-y-4">
             {userType === "creator" ? (
@@ -352,28 +352,37 @@ export default function Home() {
         @media (min-width: 768px) {
           .desktop-snap {
             scroll-snap-type: y mandatory;
-            overflow-y: scroll;
+            overflow-y: auto;
             height: 100vh;
           }
           .desktop-snap > section {
             scroll-snap-align: start;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
           }
         }
+        @media (max-width: 767px) {
+          .desktop-snap {
+            overflow-y: auto;
+          }
+          .desktop-snap > section {
+            min-height: auto;
+            padding: 2rem 0;
+          }
+        }
       `}</style>
       <div className="desktop-snap">
-        <section className="min-h-screen flex items-center">
+        <section>
           <HeroSection />
         </section>
-        <section className="min-h-screen flex items-center">
+        <section>
           <FeaturesSection />
         </section>
-        <section className="min-h-screen flex items-center">
+        <section>
           <UserJourneySection />
         </section>
-        <section className="min-h-screen flex items-center">
+        <section>
           <CTASection />
         </section>
       </div>
