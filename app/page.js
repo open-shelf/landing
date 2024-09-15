@@ -175,7 +175,7 @@ export default function Home() {
               }`}
               onClick={() => setUserType("creator")}
             >
-              I'm a Creator
+              I&apos;m a Creator
             </button>
             <button
               type="button"
@@ -186,7 +186,7 @@ export default function Home() {
               }`}
               onClick={() => setUserType("consumer")}
             >
-              I'm a Consumer
+              I&apos;m a Consumer
             </button>
           </div>
         </div>
@@ -194,8 +194,8 @@ export default function Home() {
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-2xl font-semibold mb-4 text-[#1D3557]">
             {userType === "creator"
-              ? "Creator's Journey"
-              : "Consumer's Journey"}
+              ? "Creator&apos;s Journey"
+              : "Consumer&apos;s Journey"}
           </h3>
           <ul className="space-y-4">
             {userType === "creator" ? (
