@@ -305,6 +305,7 @@ export default function Home() {
           /> */}
         </div>
       </div>
+      <ContactSection />
     </div>
   );
 
