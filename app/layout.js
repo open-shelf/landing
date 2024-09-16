@@ -1,9 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Revolutionize Your Reading Experience",
+  title: "OpenShelf",
   description:
-    "Read by the chapter. Support your favorite authors. Earn rewards.",
+    "New Media Paradigm: Pay for What You Use, Stake What You Love, and Earn Passively",
 };
 
 export default function RootLayout({ children }) {
