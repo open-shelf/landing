@@ -79,8 +79,8 @@ export default function Home() {
           Pay for What You Use, Stake and Earn on What You Love
         </h2>
         <p className="mt-6 text-lg leading-8 text-[#1D3557]">
-          Revolutionize your content experience. Support creators directly.
-          Maximize your earnings.
+          Revolutionize your content experience. Support creators directly. Make
+          money doing so.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <a
@@ -109,7 +109,10 @@ export default function Home() {
             Smart Consumption
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-[#1D3557] sm:text-4xl">
-            Tailored Content, Fair Pricing, Real Earnings
+            Discover, Consume, Invest:
+          </p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-[#1D3557] sm:text-4xl">
+            A New Media Paradigm
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -119,29 +122,37 @@ export default function Home() {
                 name: "Precision Pricing",
                 description:
                   "Pay per chapter for books, per minute for music, videos, and games. Only pay for what you truly enjoy.",
+                icon: "/vectors/price.png",
               },
               {
                 name: "Stake on Potential",
                 description:
                   "Invest in content you believe in. Reap rewards as it gains popularity across all media types.",
+                icon: "/vectors/stake.png",
               },
               {
                 name: "Empower Creators",
                 description:
                   "Directly support emerging talent. Help your favorite authors, musicians, filmmakers, and game developers thrive.",
+                icon: "/vectors/popular.png",
               },
               {
                 name: "Earn Through Engagement",
                 description:
                   "Transform your media instincts into tangible rewards. Profit from discovering the next big hit.",
+                icon: "/vectors/engagement.png",
               },
             ].map((feature) => (
               <div key={feature.name} className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-[#1D3557]">
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E63946]">
-                    <ChevronRightIcon
-                      className="h-6 w-6 text-white"
-                      aria-hidden="true"
+                    <Image
+                      src={feature.icon}
+                      alt={feature.name}
+                      width={24}
+                      height={24}
+                      className="filter brightness-0 invert" // This will make the icon white
+                      style={{ transform: "scale(1.2)" }}
                     />
                   </div>
                   {feature.name}
@@ -157,115 +168,181 @@ export default function Home() {
     </div>
   );
 
-  const UserJourneySection = () => (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      <div className="relative isolate overflow-hidden bg-[#A8DADC] px-6 py-12 shadow-2xl sm:rounded-3xl sm:px-16 md:py-16 lg:px-24">
-        <h2 className="text-3xl font-bold text-center mb-8 text-[#1D3557]">
-          Your Journey with OpenShelf
-        </h2>
+  const UserJourneySection = () => {
+    const [userType, setUserType] = useState("creator");
+    const [action, setAction] = useState({
+      main: "write a book",
+      sub: "earn as it sells",
+    });
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-md shadow-sm" role="group">
-            <button
-              type="button"
-              className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
-                userType === "creator"
-                  ? "bg-[#E63946] text-white"
-                  : "bg-white text-[#1D3557] hover:bg-gray-100"
-              }`}
-              onClick={() => setUserType("creator")}
+    useEffect(() => {
+      const actions =
+        userType === "creator"
+          ? [
+              { main: "write a book", sub: "earn per sale" },
+              { main: "compose music", sub: "profit per stream" },
+              { main: "develop a game", sub: "gain per play" },
+              { main: "create a video", sub: "monetize views" },
+            ]
+          : [
+              { main: "read books", sub: "stake on potential" },
+              { main: "listen to music", sub: "earn from hits" },
+              { main: "play games", sub: "profit from trends" },
+              { main: "watch videos", sub: "gain from virals" },
+            ];
+
+      let index = 0;
+
+      const intervalId = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          index = (index + 1) % actions.length;
+          setAction(actions[index]);
+          setIsTransitioning(false);
+        }, 500); // Half of the interval for smooth transition
+      }, 2500);
+
+      return () => clearInterval(intervalId);
+    }, [userType]);
+
+    return (
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative isolate overflow-hidden bg-[#A8DADC] px-6 py-12 shadow-2xl sm:rounded-3xl sm:px-16 md:py-16 lg:px-24">
+          <h2 className="text-3xl font-bold text-center mb-8 text-[#1D3557]">
+            Your Journey with OpenShelf
+          </h2>
+
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex rounded-md shadow-sm" role="group">
+              <button
+                type="button"
+                className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
+                  userType === "creator"
+                    ? "bg-[#E63946] text-white"
+                    : "bg-white text-[#1D3557] hover:bg-gray-100"
+                }`}
+                onClick={() => setUserType("creator")}
+              >
+                I am a Creator
+              </button>
+              <button
+                type="button"
+                className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
+                  userType === "consumer"
+                    ? "bg-[#E63946] text-white"
+                    : "bg-white text-[#1D3557] hover:bg-gray-100"
+                }`}
+                onClick={() => setUserType("consumer")}
+              >
+                I am a Consumer
+              </button>
+            </div>
+          </div>
+
+          <h3 className="text-2xl font-semibold text-center mb-6 text-[#1D3557] min-h-16 flex items-center justify-center flex-wrap">
+            <span className="mr-2">You</span>
+            <div
+              className="relative inline-block"
+              style={{ width: "200px", height: "1.5em", overflow: "visible" }}
             >
-              I&apos;m a Creator
-            </button>
-            <button
-              type="button"
-              className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
-                userType === "consumer"
-                  ? "bg-[#E63946] text-white"
-                  : "bg-white text-[#1D3557] hover:bg-gray-100"
-              }`}
-              onClick={() => setUserType("consumer")}
+              <span
+                className={`absolute left-0 w-full text-center transition-all duration-500 ease-in-out ${
+                  isTransitioning
+                    ? "opacity-0 transform -translate-y-2"
+                    : "opacity-100 transform translate-y-0"
+                }`}
+              >
+                <span className="text-[#E63946] whitespace-nowrap">
+                  {action.main}
+                </span>
+              </span>
+            </div>
+            <span className="mx-2">and</span>
+            <div
+              className="relative inline-block"
+              style={{
+                width: "200px",
+                minHeight: "1.5em",
+                overflow: "visible",
+              }}
             >
-              I&apos;m a Consumer
-            </button>
+              <span
+                className={`absolute left-0 w-full text-center transition-all duration-500 ease-in-out ${
+                  isTransitioning
+                    ? "opacity-0 transform translate-y-2"
+                    : "opacity-100 transform translate-y-0"
+                }`}
+              >
+                <span className="text-[#457B9D] inline-block">
+                  {action.sub}
+                </span>
+              </span>
+            </div>
+          </h3>
+
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-2xl font-semibold mb-4 text-[#1D3557]">
+              {userType === "creator"
+                ? "Creator's Journey"
+                : "Consumer's Journey"}
+            </h3>
+            <ul className="space-y-4">
+              {userType === "creator" ? (
+                <>
+                  <li className="flex items-start">
+                    <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                    <span className="text-[#457B9D]">
+                      Instant Payments: Receive earnings immediately after each
+                      sale or engagement.
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                    <span className="text-[#457B9D]">
+                      Fair Compensation: Benefit from our transparent revenue
+                      sharing model.
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                    <span className="text-[#457B9D]">
+                      Community Building: Engage with supporters invested in
+                      your success.
+                    </span>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="flex items-start">
+                    <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                    <span className="text-[#457B9D]">
+                      Pay-Per-Use: Only pay for the content you actually
+                      consume.
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                    <span className="text-[#457B9D]">
+                      Stake & Earn: Support promising content and profit from
+                      its success.
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
+                    <span className="text-[#457B9D]">
+                      Flexible Consumption: Enjoy content by chapter, track, or
+                      playtime.
+                    </span>
+                  </li>
+                </>
+              )}
+            </ul>
           </div>
         </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-2xl font-semibold mb-4 text-[#1D3557]">
-            {userType === "creator"
-              ? "Creator's Journey"
-              : "Consumer's Journey"}
-          </h3>
-          <ul className="space-y-4">
-            {userType === "creator" ? (
-              <>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Instant Payments: Receive earnings directly in seconds after
-                    each sale.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Honest Reviews: Staking system ensures genuine feedback from
-                    invested consumers.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Fair Compensation: Earn more with our transparent revenue
-                    sharing model.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Engage Directly: Build a community of supporters who are
-                    invested in your success.
-                  </span>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Pay-Per-Use: Only pay for the content you actually consume,
-                    saving costs.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Passive Income: Earn rewards by staking on content you
-                    believe will be successful.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Discover Gems: Support emerging creators and benefit from
-                    their success.
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRightIcon className="h-6 w-6 text-[#E63946] mr-2 flex-shrink-0" />
-                  <span className="text-[#457B9D]">
-                    Flexible Consumption: Enjoy books by chapter, music by
-                    track, videos and games by playtime.
-                  </span>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const CTASection = () => (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
