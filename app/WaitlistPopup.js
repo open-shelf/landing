@@ -20,7 +20,7 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "20cbe309-ded1-4c80-914b-b5e0b455f64d",
+          access_key: "5ad1df08-66bb-480f-8854-bd4513a0856b",
           name,
           email,
           message: `User Type: ${userType}\nMessage: ${message}`,
