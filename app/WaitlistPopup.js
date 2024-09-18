@@ -35,7 +35,7 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
           name,
           email,
           message: `User Type: ${userType}\nMessage: ${message}`,
-          // "g-recaptcha-response": captchaToken,
+          "g-recaptcha-response": captchaToken,
         }),
       });
 
@@ -124,7 +124,7 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946]"
+              className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946] bg-white text-[#1D3557]"
             />
           </div>
           <div className="mb-4">
@@ -138,7 +138,7 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946]"
+              className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946] bg-white text-[#1D3557]"
             />
           </div>
           <div className="mb-4">
@@ -150,7 +150,7 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
               name="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946]"
+              className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946] bg-white text-[#1D3557]"
               rows="3"
             />
           </div>
