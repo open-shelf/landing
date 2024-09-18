@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const WaitlistPopup = ({ isOpen, onClose }) => {
   const [name, setName] = useState("");
@@ -7,10 +8,20 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
   const [userType, setUserType] = useState("");
   const [message, setMessage] = useState("");
   const [submissionState, setSubmissionState] = useState(null); // null, 'success', or 'error'
+  const [captchaToken, setCaptchaToken] = useState(null);
+
+  const handleCaptchaChange = useCallback((token) => {
+    setCaptchaToken(token);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmissionState(null);
+
+    if (!captchaToken) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -20,10 +31,11 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "5ad1df08-66bb-480f-8854-bd4513a0856b",
+          access_key: "20cbe309-ded1-4c80-914b-b5e0b455f64d",
           name,
           email,
           message: `User Type: ${userType}\nMessage: ${message}`,
+          "g-recaptcha-response": captchaToken,
         }),
       });
 
@@ -140,6 +152,12 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
               onChange={(e) => setMessage(e.target.value)}
               className="w-full px-3 py-2 border border-[#457B9D] rounded focus:outline-none focus:border-[#E63946]"
               rows="3"
+            />
+          </div>
+          <div className="mb-4">
+            <ReCAPTCHA
+              sitekey="6LfBjUgqAAAAAHOwY9HXarY1w-RrVf6ErUc3kA3B"
+              onChange={handleCaptchaChange}
             />
           </div>
           <div className="flex justify-end">
