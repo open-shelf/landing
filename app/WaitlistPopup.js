@@ -35,7 +35,7 @@ const WaitlistPopup = ({ isOpen, onClose }) => {
           name,
           email,
           message: `User Type: ${userType}\nMessage: ${message}`,
-          "g-recaptcha-response": captchaToken,
+          // "g-recaptcha-response": captchaToken,
         }),
       });
 
