@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
+import WaitlistPopup from "./WaitlistPopup";
 
 // SVG icons for social media
 const TwitterIcon = () => (
@@ -45,6 +46,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState(0);
   const [userType, setUserType] = useState("creator");
   const observerRefs = useRef([]);
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   useEffect(() => {
     const observers = observerRefs.current.map((ref, index) => {
@@ -86,15 +88,13 @@ export default function Home() {
           <a
             href="#"
             className="rounded-md bg-[#E63946] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#c81d2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E63946]"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsWaitlistOpen(true);
+            }}
           >
             Join OpenShelf
           </a>
-          {/* <a
-            href="#"
-            className="text-sm font-semibold leading-6 text-[#457B9D] hover:text-[#1D3557]"
-          >
-            Learn more <span aria-hidden="true">→</span>
-          </a> */}
         </div>
         <ContactSection />
       </div>
@@ -361,6 +361,10 @@ export default function Home() {
             <a
               href="#"
               className="rounded-md bg-[#E63946] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#c81d2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E63946] w-full sm:w-auto"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsWaitlistOpen(true);
+              }}
             >
               Join the Waitlist
             </a>
@@ -454,6 +458,10 @@ export default function Home() {
           <CTASection />
         </section>
       </div>
+      <WaitlistPopup
+        isOpen={isWaitlistOpen}
+        onClose={() => setIsWaitlistOpen(false)}
+      />
     </div>
   );
 }
