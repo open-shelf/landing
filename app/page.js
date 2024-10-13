@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
 import WaitlistPopup from "./WaitlistPopup";
 
@@ -42,11 +42,22 @@ const EmailIcon = () => (
   </svg>
 );
 
+// Add this new component after the existing icon components
+const ScrollIndicator = ({ onClick }) => (
+  <div
+    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
+    onClick={onClick}
+  >
+    <ChevronDownIcon className="h-8 w-8 text-[#1D3557]" />
+  </div>
+);
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState(0);
   const [userType, setUserType] = useState("creator");
   const observerRefs = useRef([]);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   useEffect(() => {
     const observers = observerRefs.current.map((ref, index) => {
@@ -66,10 +77,29 @@ export default function Home() {
       return observer;
     });
 
+    // Add this new effect for hiding the scroll indicator
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowScrollIndicator(false);
+      } else {
+        setShowScrollIndicator(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       observers.forEach((observer) => observer.disconnect());
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const scrollToNextSection = (currentIndex) => {
+    const nextSection = observerRefs.current[currentIndex + 1];
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const HeroSection = () => (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -445,16 +475,34 @@ export default function Home() {
         }
       `}</style>
       <div className="desktop-snap">
-        <section>
+        <section
+          ref={(el) => (observerRefs.current[0] = el)}
+          className="relative"
+        >
           <HeroSection />
+          {showScrollIndicator && (
+            <ScrollIndicator onClick={() => scrollToNextSection(0)} />
+          )}
         </section>
-        <section>
+        <section
+          ref={(el) => (observerRefs.current[1] = el)}
+          className="relative"
+        >
           <FeaturesSection />
+          {showScrollIndicator && (
+            <ScrollIndicator onClick={() => scrollToNextSection(1)} />
+          )}
         </section>
-        <section>
+        <section
+          ref={(el) => (observerRefs.current[2] = el)}
+          className="relative"
+        >
           <UserJourneySection />
+          {showScrollIndicator && (
+            <ScrollIndicator onClick={() => scrollToNextSection(2)} />
+          )}
         </section>
-        <section>
+        <section ref={(el) => (observerRefs.current[3] = el)}>
           <CTASection />
         </section>
       </div>
