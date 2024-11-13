@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
-import WaitlistPopup from "./WaitlistPopup";
 
 // SVG icons for social media
 const TwitterIcon = () => (
@@ -52,11 +51,60 @@ const ScrollIndicator = ({ onClick }) => (
   </div>
 );
 
+// Replace the empty trustedBy component with this implementation
+const TrustedBy = () => (
+  <div className="bg-white py-10 mt-4 rounded-lg shadow-sm max-w-2xl mx-auto">
+    <h2 className="text-center text-lg font-semibold leading-8 text-[#1D3557] mb-2">
+      Trusted By
+    </h2>
+    <div className="px-6 lg:px-8">
+      <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 items-center gap-x-12 gap-y-10">
+        {/* Solana Logo */}
+        <div className="flex flex-col items-center">
+          <Image
+            src="/vectors/solana.png"
+            alt="Solana"
+            width={160}
+            height={32}
+            className="object-contain h-10 mb-3"
+          />
+          <span className="text-base text-[#457B9D] font-medium">Solana</span>
+        </div>
+        {/* Aachen Blockchain Club Logo */}
+        <div className="flex flex-col items-center">
+          <Image
+            src="/vectors/ABC.black.png"
+            alt="Aachen Blockchain Club"
+            width={160}
+            height={32}
+            className="object-contain h-10 mb-3"
+          />
+          <span className="text-base text-[#457B9D] font-medium">
+            Aachen Blockchain Club
+          </span>
+        </div>
+        {/* Superteam DE Logo */}
+        <div className="flex flex-col items-center">
+          <Image
+            src="/vectors/superteam-de.jpg"
+            alt="Superteam DE"
+            width={160}
+            height={32}
+            className="object-contain h-10 mb-3"
+          />
+          <span className="text-base text-[#457B9D] font-medium">
+            Superteam DE
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState(0);
   const [userType, setUserType] = useState("creator");
   const observerRefs = useRef([]);
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   useEffect(() => {
@@ -116,17 +164,16 @@ export default function Home() {
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <a
-            href="#"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScAQVUuILaZmuXOx4nQ0v58Y9am9f2gkkiLtMcZ34OIwGsN8g/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-md bg-[#E63946] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#c81d2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E63946]"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsWaitlistOpen(true);
-            }}
           >
             Join OpenShelf
           </a>
         </div>
         <ContactSection />
+        <TrustedBy />
       </div>
     </div>
   );
@@ -389,12 +436,10 @@ export default function Home() {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-y-4 sm:gap-x-6 lg:justify-start">
             <a
-              href="#"
+              href="https://docs.google.com/forms/d/e/1FAIpQLScAQVUuILaZmuXOx4nQ0v58Y9am9f2gkkiLtMcZ34OIwGsN8g/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-md bg-[#E63946] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#c81d2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E63946] w-full sm:w-auto"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsWaitlistOpen(true);
-              }}
             >
               Join the Waitlist
             </a>
@@ -506,10 +551,6 @@ export default function Home() {
           <CTASection />
         </section>
       </div>
-      <WaitlistPopup
-        isOpen={isWaitlistOpen}
-        onClose={() => setIsWaitlistOpen(false)}
-      />
     </div>
   );
 }
