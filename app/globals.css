@@ -2,21 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    --background: 229 27% 8%;
+    --foreground: 210 40% 98%;
+    --card: 229 23% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 229 23% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 252 100% 67%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 229 23% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 229 23% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 168 97% 42%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 229 23% 18%;
+    --input: 229 23% 18%;
+    --ring: 252 100% 67%;
+    --radius: 0.75rem;
+    --chart-1: 252 100% 67%;
+    --chart-2: 168 97% 42%;
+    --chart-3: 199 89% 48%;
+    --chart-4: 43 96% 56%;
+    --chart-5: 322 100% 60%;
+  }
+
+  .dark {
+    --background: 201 24% 12%;
+    --foreground: 200 30% 96%;
+    --card: 201 24% 16%;
+    --card-foreground: 200 30% 96%;
+    --popover: 201 24% 16%;
+    --popover-foreground: 200 30% 96%;
+    --primary: 351 84% 56%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 201 24% 24%;
+    --secondary-foreground: 200 30% 96%;
+    --muted: 201 24% 24%;
+    --muted-foreground: 200 30% 75%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 200 30% 96%;
+    --border: 201 24% 24%;
+    --input: 201 24% 24%;
+    --ring: 200 30% 96%;
+    --chart-1: 351 84% 56%;
+    --chart-2: 199 89% 48%;
+    --chart-3: 200 30% 96%;
+    --chart-4: 43 96% 56%;
+    --chart-5: 167 78% 46%;
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.golden-button {
+  background: linear-gradient(45deg, #7C3AED, #8B5CF6, #C4B5FD) !important;
+  border: 1px solid rgba(124, 58, 237, 0.5) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.golden-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.3) !important;
+  border: 1px solid rgba(124, 58, 237, 0.8) !important;
+}
+
+.gloss-effect {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  transform: rotate(45deg);
+  animation: gloss 3s infinite linear;
+}
+
+@keyframes gloss {
+  0% {
+    transform: rotate(45deg) translateX(-100%);
+    opacity: 0.1;
+  }
+  100% {
+    transform: rotate(45deg) translateX(100%);
+    opacity: 0.2;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   overflow-y: auto; /* Allow vertical scrolling */
 }
@@ -65,4 +162,11 @@ html {
     min-height: auto;
     padding: 2rem 0;
   }
+}
+
+/* Add these styles to your existing CSS */
+.bg-card {
+  background: hsla(229, 23%, 12%, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid hsla(229, 23%, 25%, 0.3) !important;
 }
